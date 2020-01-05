@@ -79,16 +79,20 @@
 
 
 
-<meta name="description" content="Computer System Notes (1): Arithmetic In Computer SystemBasic Unit of Information Storage in ComputerByte: 8 bit binary Two means of pointer in C: type and value Word Size and Byte OrderingWord SizeSy">
+<meta name="description" content="IntroductionPCA and SVD are two widely used dimensional reduction techniques. Dimension Reduction, namely, is to save the information from origin data as much as possible and reduce the attributes tha">
 <meta name="keywords" content="Artificial Intelligence, Python , RecSys, Computer Science">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Operating System Notes (1)">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;10&#x2F;22&#x2F;Operating%20System%20Notes%20(1)&#x2F;index.html">
+<meta property="og:title" content="Machine Learning Notes (2): PCA and SVD">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;01&#x2F;05&#x2F;Machine%20Learning%20Notes%20(2):%20PCA%20and%20SVD&#x2F;index.html">
 <meta property="og:site_name" content="Jason&#39;s Home">
-<meta property="og:description" content="Computer System Notes (1): Arithmetic In Computer SystemBasic Unit of Information Storage in ComputerByte: 8 bit binary Two means of pointer in C: type and value Word Size and Byte OrderingWord SizeSy">
+<meta property="og:description" content="IntroductionPCA and SVD are two widely used dimensional reduction techniques. Dimension Reduction, namely, is to save the information from origin data as much as possible and reduce the attributes tha">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-10-31T02:26:10.361Z">
+<meta property="og:image" content="http:&#x2F;&#x2F;latex.codecogs.com&#x2F;gif.latex?%5Cboldsymbol%7BA%7D=%5Csum_%7Bi=1%7D%5E%7Brank(A)%7D%7B%5Csigma_i%5Cboldsymbol%7Bu%7D_i%5Cboldsymbol%7Bv%7D_i%5ET%7D=%5Cboldsymbol%7BU%7D%5Cboldsymbol%7B%5CSigma%7D%5Cboldsymbol%7BV%7D%5ET">
+<meta property="og:image" content="http:&#x2F;&#x2F;latex.codecogs.com&#x2F;gif.latex?%5Cboldsymbol%7BU%7D=%5Cleft%5B%5Cboldsymbol%7Bu%7D_1,%5Cdots,%5Cboldsymbol%7Bu%7D_r%5Cright%5D,%5Cboldsymbol%7BV%7D=%5Cleft%5B%5Cboldsymbol%7Bv%7D_1,%5Cdots,%5Cboldsymbol%7Bv%7D_r%5Cright%5D">
+<meta property="og:image" content="http:&#x2F;&#x2F;latex.codecogs.com&#x2F;gif.latex?%5CSigma=(%5Csigma_i)_%7Br%5Ctimes&amp;r%7D">
+<meta property="og:updated_time" content="2020-01-05T14:02:46.284Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;latex.codecogs.com&#x2F;gif.latex?%5Cboldsymbol%7BA%7D=%5Csum_%7Bi=1%7D%5E%7Brank(A)%7D%7B%5Csigma_i%5Cboldsymbol%7Bu%7D_i%5Cboldsymbol%7Bv%7D_i%5ET%7D=%5Cboldsymbol%7BU%7D%5Cboldsymbol%7B%5CSigma%7D%5Cboldsymbol%7BV%7D%5ET">
 
 
 
@@ -118,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/10/22/Operating System Notes (1)/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/01/05/Machine Learning Notes (2): PCA and SVD/"/>
 
 
 
 
 
-  <title>Operating System Notes (1) | Jason's Home</title>
+  <title>Machine Learning Notes (2): PCA and SVD | Jason's Home</title>
   
 
 
@@ -180,9 +184,9 @@
       
         
         <li class="menu-item menu-item-home">
-          <a href="/%20" rel="section">
+          <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
             
             Home
           </a>
@@ -190,9 +194,9 @@
       
         
         <li class="menu-item menu-item-archives">
-          <a href="/archives/%20" rel="section">
+          <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
             
             Archives
           </a>
@@ -231,7 +235,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/22/Operating%20System%20Notes%20(1)/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/05/Machine%20Learning%20Notes%20(2):%20PCA%20and%20SVD/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jason Yi">
@@ -248,7 +252,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Operating System Notes (1)</h1>
+          <h1 class="post-title" itemprop="name headline">Machine Learning Notes (2): PCA and SVD</h1>
         
 
         <div class="post-meta">
@@ -260,8 +264,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-22T18:25:23+08:00">
-                2019-10-22
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-01-05T22:02:46+08:00">
+                2020-01-05
               </time>
             
 
@@ -298,10 +302,52 @@
       
 
       
-        <h1 id="Computer-System-Notes-1-Arithmetic-In-Computer-System"><a href="#Computer-System-Notes-1-Arithmetic-In-Computer-System" class="headerlink" title="Computer System Notes (1): Arithmetic In Computer System"></a>Computer System Notes (1): Arithmetic In Computer System</h1><h2 id="Basic-Unit-of-Information-Storage-in-Computer"><a href="#Basic-Unit-of-Information-Storage-in-Computer" class="headerlink" title="Basic Unit of Information Storage in Computer"></a>Basic Unit of Information Storage in Computer</h2><p><strong>Byte</strong>: 8 bit binary</p>
-<p><strong>Two means of pointer in C</strong>: <em>type</em> and <em>value</em></p>
-<h2 id="Word-Size-and-Byte-Ordering"><a href="#Word-Size-and-Byte-Ordering" class="headerlink" title="Word Size and Byte Ordering"></a>Word Size and Byte Ordering</h2><h3 id="Word-Size"><a href="#Word-Size" class="headerlink" title="Word Size"></a>Word Size</h3><p>System Bit which represents the size of integer and pointer namely. Word size determines the capacity of virtual memory space;</p>
-<h3 id="Byte-Ordering"><a href="#Byte-Ordering" class="headerlink" title="Byte Ordering"></a>Byte Ordering</h3><p>Each bit has its own weight. An object’s binary representation is a sequence which has been ordered:<br>$x_{w-1}, x_{w-1}, /dots, x_{0}$</p>
+        <h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>PCA and SVD are two widely used dimensional reduction techniques. Dimension Reduction, namely, is to save the information from origin data as much as possible and reduce the attributes that the data has as less as possible. PCA and SVD are closely related and the difference between them is that SVD still have the means of data opposite to PCA;</p>
+<h1 id="Core-Concept"><a href="#Core-Concept" class="headerlink" title="Core Concept"></a>Core Concept</h1><ol>
+<li>Principle Component Analysis (PCA);</li>
+<li>Singular Value Decomposition (SVD);</li>
+</ol>
+<a id="more"></a>
+
+<h1 id="Principle-Component-Analysis"><a href="#Principle-Component-Analysis" class="headerlink" title="Principle Component Analysis"></a>Principle Component Analysis</h1><p>The goal of PCA is to find a new set of dimensions that better captures the variability of data. Several appealing characteristics PCA has:</p>
+<ol>
+<li>Tends to identify the strongest patterns in the data (so that PCA can be used as a pattern-finding technique);</li>
+<li>Most of the variability can be captured by a small fraction of the total set of dimensions;</li>
+<li>Eliminating much of the noise if noise in the data is weaker than the pattern;</li>
+</ol>
+<p>Let’s see some PCA’s detail first. </p>
+<h2 id="Details-of-PCA"><a href="#Details-of-PCA" class="headerlink" title="Details of PCA"></a>Details of PCA</h2><p>The goal of PCA is to find a transformation of data that satisfies:</p>
+<ol>
+<li>Each pair of new attributes have 0 covariance;</li>
+<li>The attributes are ordered with respect to how much of the variance of the data each attribute captures;</li>
+<li>The first attribute captures as much of the variance of the data as possible;;</li>
+</ol>
+<p>The progress of PCA is:</p>
+<ol>
+<li>Calculate the covariance matrix <strong>S</strong> for the attributes of data set <strong>D</strong>;</li>
+<li>Calculate the matrix <strong>U</strong> which is composed by eigenvectors of <strong>S</strong>;</li>
+<li>Calculate the linear transformation <strong>D’</strong> = <strong>DU</strong>, then <strong>D’</strong> is the new transformed data set. Therefor we reduce the dimension to <em>k</em> (the number of eigenvalues);</li>
+</ol>
+<h1 id="Singular-Value-Decomposition"><a href="#Singular-Value-Decomposition" class="headerlink" title="Singular Value Decomposition"></a>Singular Value Decomposition</h1><p>Singular Value Decomposition is a highlight in linear algebra. If we want to diagonalize a <em>m x n</em> matrix <em>A</em>, we cannot use eigenvectors because they are usually not orthogonal, not enough and requires <em>A</em> to be a square matrix. SVD solve these problems in a perfect way. </p>
+<p>SVD tries to decompose a <em>m x n</em> matrix <em>A</em> in a from:</p>
+<p><img src="http://latex.codecogs.com/gif.latex?%5Cboldsymbol%7BA%7D=%5Csum_%7Bi=1%7D%5E%7Brank(A)%7D%7B%5Csigma_i%5Cboldsymbol%7Bu%7D_i%5Cboldsymbol%7Bv%7D_i%5ET%7D=%5Cboldsymbol%7BU%7D%5Cboldsymbol%7B%5CSigma%7D%5Cboldsymbol%7BV%7D%5ET" alt=""></p>
+<p>such that:</p>
+<p><img src="http://latex.codecogs.com/gif.latex?%5Cboldsymbol%7BU%7D=%5Cleft%5B%5Cboldsymbol%7Bu%7D_1,%5Cdots,%5Cboldsymbol%7Bu%7D_r%5Cright%5D,%5Cboldsymbol%7BV%7D=%5Cleft%5B%5Cboldsymbol%7Bv%7D_1,%5Cdots,%5Cboldsymbol%7Bv%7D_r%5Cright%5D" alt=""></p>
+<p><img src="http://latex.codecogs.com/gif.latex?%5CSigma=(%5Csigma_i)_%7Br%5Ctimes&r%7D" alt=""></p>
+<p>With all these mathematical tools, if we have a data set <strong>D</strong>, we can reduce its attributes like:</p>
+<ol>
+<li>Compute the left singular value <strong>U</strong> of <strong>D</strong> and its right singular value <strong>V</strong>;</li>
+<li>Compute the matrix <strong>D’</strong> = <strong>DV</strong>, then <strong>D’</strong> is the new transformed data we want. Therefore we reduce data set’s dimension to <em>r</em>;</li>
+</ol>
+<p>SVD has following properties:</p>
+<ol>
+<li>Right singular vectors, i.e., the columns of <strong>V</strong> captures patterns among the attributes;</li>
+<li>Left singular vectors, i.e., the columns of <strong>U</strong> captures patterns among the objects; </li>
+</ol>
+<h1 id="Take-a-closer-look-on-PCA-and-SVD"><a href="#Take-a-closer-look-on-PCA-and-SVD" class="headerlink" title="Take a closer look on PCA and SVD"></a>Take a closer look on PCA and SVD</h1><ol>
+<li>PCA and SVD are closely related viewed from linear algebra because they are both matrix decomposition techniques.</li>
+<li>After processed by PCA, the new set of attributes are linear uncorrelated, but SVD maybe not;   </li>
+</ol>
 
       
     </div>
@@ -326,8 +372,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/10/22/Machine%20Learning%20Notes%20(1)/" rel="next" title="Machine Learning Notes (1)">
-                <i class="fa fa-chevron-left"></i> Machine Learning Notes (1)
+              <a href="/2020/01/05/Operating%20System%20Notes%20(1):%20Representing%20and%20Manipulating%20Information/" rel="next" title="Operating System Notes (1): Representing and Manipulating Information">
+                <i class="fa fa-chevron-left"></i> Operating System Notes (1): Representing and Manipulating Information
               </a>
             
           </div>
@@ -335,10 +381,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/01/01/Learning%20DataStructure%20(1):%20Hash%20Table/" rel="prev" title="hash">
-                hash <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -413,9 +455,9 @@
             
               <div class="site-state-item site-state-posts">
               
-                <a href="/archives/%20%7C%7C%20archive">
+                <a href="/archives">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -452,7 +494,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Computer-System-Notes-1-Arithmetic-In-Computer-System"><span class="nav-number">1.</span> <span class="nav-text">Computer System Notes (1): Arithmetic In Computer System</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic-Unit-of-Information-Storage-in-Computer"><span class="nav-number">1.1.</span> <span class="nav-text">Basic Unit of Information Storage in Computer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Word-Size-and-Byte-Ordering"><span class="nav-number">1.2.</span> <span class="nav-text">Word Size and Byte Ordering</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Word-Size"><span class="nav-number">1.2.1.</span> <span class="nav-text">Word Size</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Byte-Ordering"><span class="nav-number">1.2.2.</span> <span class="nav-text">Byte Ordering</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Core-Concept"><span class="nav-number">2.</span> <span class="nav-text">Core Concept</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Principle-Component-Analysis"><span class="nav-number">3.</span> <span class="nav-text">Principle Component Analysis</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Details-of-PCA"><span class="nav-number">3.1.</span> <span class="nav-text">Details of PCA</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Singular-Value-Decomposition"><span class="nav-number">4.</span> <span class="nav-text">Singular Value Decomposition</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Take-a-closer-look-on-PCA-and-SVD"><span class="nav-number">5.</span> <span class="nav-text">Take a closer look on PCA and SVD</span></a></li></ol></div>
             
 
           </div>

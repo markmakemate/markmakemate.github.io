@@ -79,22 +79,23 @@
 
 
 
-<meta name="description" content="Learning Data Structure(1)： Hash TableIntroductionWhat is Hash Table?Hash table is a special form of an ordinary array. It can complete SEARCH, INSERT and DELETE in O(1) average time; Core concepts Ha">
+<meta name="description" content="IntroductionWhat is Hash Table?Hash table is a special form of an ordinary array. It can complete SEARCH, INSERT and DELETE in O(1) average time; Core concepts Hash Function and Collision; Chaining an">
 <meta name="keywords" content="Artificial Intelligence, Python , RecSys, Computer Science">
 <meta property="og:type" content="article">
-<meta property="og:title" content="hash">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;01&#x2F;01&#x2F;Learning%20DataStructure%20(1):%20Hash%20Table&#x2F;index.html">
+<meta property="og:title" content="Learning DataStructure (1): Hash Table">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;01&#x2F;02&#x2F;Learning%20DataStructure%20(1):%20Hash%20Table&#x2F;index.html">
 <meta property="og:site_name" content="Jason&#39;s Home">
-<meta property="og:description" content="Learning Data Structure(1)： Hash TableIntroductionWhat is Hash Table?Hash table is a special form of an ordinary array. It can complete SEARCH, INSERT and DELETE in O(1) average time; Core concepts Ha">
+<meta property="og:description" content="IntroductionWhat is Hash Table?Hash table is a special form of an ordinary array. It can complete SEARCH, INSERT and DELETE in O(1) average time; Core concepts Hash Function and Collision; Chaining an">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http:&#x2F;&#x2F;latex.codecogs.com&#x2F;gif.latex?h:U%5Crightarrow%5Cleft%5B0,%20%5Cdots,%20m-1%20%5Cright%5D">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;01&#x2F;01&#x2F;_images&#x2F;hash_table.jpg">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;01&#x2F;01&#x2F;_images&#x2F;uni_hash.jpg">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;01&#x2F;01&#x2F;_images&#x2F;uni_hash_class.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;hash_table.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;uni_hash.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;uni_hash_class.jpg">
 <meta property="og:image" content="http:&#x2F;&#x2F;latex.codecogs.com&#x2F;gif.latex?Z_%7Bp%7D%5E%7B*%7D=%5Cleft%7B0,%201,%20%5Cdots%20,%20p-1%20%5Cright%7D,%20Z_%7Bp%7D=%5Cleft%7B1,%20%5Cdots%20,%20p-1%20%5Cright%7D">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;01&#x2F;01&#x2F;_images&#x2F;chaining.jpg">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;01&#x2F;01&#x2F;_images&#x2F;Quadratic_Probing.jpg">
-<meta property="og:updated_time" content="2020-01-01T13:21:54.904Z">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;chaining.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;Linear_Probing.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;Quadratic_Probing.jpg">
+<meta property="og:updated_time" content="2020-01-01T16:11:31.714Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;latex.codecogs.com&#x2F;gif.latex?h:U%5Crightarrow%5Cleft%5B0,%20%5Cdots,%20m-1%20%5Cright%5D">
 
@@ -126,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/01/01/Learning DataStructure (1): Hash Table/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/01/02/Learning DataStructure (1): Hash Table/"/>
 
 
 
 
 
-  <title>hash | Jason's Home</title>
+  <title>Learning DataStructure (1): Hash Table | Jason's Home</title>
   
 
 
@@ -188,9 +189,9 @@
       
         
         <li class="menu-item menu-item-home">
-          <a href="/%20" rel="section">
+          <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
             
             Home
           </a>
@@ -198,9 +199,9 @@
       
         
         <li class="menu-item menu-item-archives">
-          <a href="/archives/%20" rel="section">
+          <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
             
             Archives
           </a>
@@ -239,7 +240,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/01/Learning%20DataStructure%20(1):%20Hash%20Table/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/02/Learning%20DataStructure%20(1):%20Hash%20Table/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jason Yi">
@@ -256,7 +257,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">hash</h1>
+          <h1 class="post-title" itemprop="name headline">Learning DataStructure (1): Hash Table</h1>
         
 
         <div class="post-meta">
@@ -268,8 +269,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-01-01T21:20:06+08:00">
-                2020-01-01
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-01-02T00:11:31+08:00">
+                2020-01-02
               </time>
             
 
@@ -306,43 +307,45 @@
       
 
       
-        <h1 id="Learning-Data-Structure-1-：-Hash-Table"><a href="#Learning-Data-Structure-1-：-Hash-Table" class="headerlink" title="Learning Data Structure(1)： Hash Table"></a>Learning Data Structure(1)： Hash Table</h1><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><h3 id="What-is-Hash-Table"><a href="#What-is-Hash-Table" class="headerlink" title="What is Hash Table?"></a>What is Hash Table?</h3><p>Hash table is a special form of an ordinary array. It can complete SEARCH, INSERT and DELETE in <em>O(1)</em> average time;</p>
+        <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><h3 id="What-is-Hash-Table"><a href="#What-is-Hash-Table" class="headerlink" title="What is Hash Table?"></a>What is Hash Table?</h3><p>Hash table is a special form of an ordinary array. It can complete SEARCH, INSERT and DELETE in <em>O(1)</em> average time;</p>
 <h3 id="Core-concepts"><a href="#Core-concepts" class="headerlink" title="Core concepts"></a>Core concepts</h3><ol>
 <li>Hash Function and Collision;</li>
 <li>Chaining and Open-Addressing;</li>
 <li>Linear Probing and Double Probing;</li>
 </ol>
-<h2 id="Hash-Function-and-Collision"><a href="#Hash-Function-and-Collision" class="headerlink" title="Hash Function and Collision"></a>Hash Function and Collision</h2><p>Hash Function is used to compute the slot from the key <em>k</em>. Hash Function <em>h</em> map key <em>k</em> to a <strong>hash table</strong><br><em>T</em>[0, …, m - 1]:<br><br><br><img src="http://latex.codecogs.com/gif.latex?h:U%5Crightarrow%5Cleft%5B0,%20%5Cdots,%20m-1%20%5Cright%5D" alt=""><br><br><br>We can understand by a simple example:<br><br>There is a teller <em>h</em> work in theater whose responsibility is to check each audience <em>k’s</em> ticket and arrange their seats. Several strategies are given:</p>
+<a id="more"></a>
+<h2 id="Hash-Function-and-Collision"><a href="#Hash-Function-and-Collision" class="headerlink" title="Hash Function and Collision"></a>Hash Function and Collision</h2><p>Hash Function is used to compute the slot from the key <em>k</em>. Hash Function <em>h</em> map key <em>k</em> to a <strong>hash table</strong><br><em>T</em> [0, …, m - 1]:<br><br><br><img src="http://latex.codecogs.com/gif.latex?h:U%5Crightarrow%5Cleft%5B0,%20%5Cdots,%20m-1%20%5Cright%5D" alt=""><br><br><br>We can understand by a simple example:<br><br>There is a teller <em>h</em> work in theater whose responsibility is to check each audience <em>k’s</em> ticket and arrange their seats. Several strategies are given:</p>
 <ol>
 <li>List all seats before checking, in each check phrase <em>h</em> scan them from the head to find the first available one; </li>
 <li>Each time after arranging <em>k</em>,  <em>h</em> records the index of next available seat then arrange <em>k + 1</em> on it;</li>
 <li><em>h</em> can initially push all seats in an array as index indicates, if a audience <em>k</em> in, the first seat will be kicked out; </li>
 <li>Teller has a magic wand which can automatically arrange each <em>k</em> on a specific seat. No more operation needed;</li>
 </ol>
-<p>Let’s take a closer look on these four strategies. The first one is <strong>linked list</strong>, every time you should search from head.<br>Its time consumption increases progressively as consumers in. The second one is record a <strong>replica</strong> which will reduce the time complexity<br>to <em>O(1)</em> but consumes more resources in recording this replica. The third one is <strong>stack</strong> which follows ‘first in, last out’ rule.<br>The last one called ‘magic wand’ is <strong>hash table</strong>, which can find a specific seat without any plus operation;<br><br>The progress is simply showed as this picture:</p>
-<p><img src="../_images/hash_table.jpg" alt="avatar"></p>
-<p>Such a progress is effective for small audience number, because all of them can be arranged on a unique position if <em>h</em> choose an <strong>ideal</strong> hash function.<br>But when there are so many audience that no hash function work well to arrange them on unique position, collision will happen.<br>So <em>collision</em> in hash progress defined that several keys will be mapped to a same slot.</p>
+<p>Let’s take a closer look on these four strategies. The first one is <strong>linked list</strong>, every time you should search from head. Its time consumption increases progressively as consumers in. The second one is record a <strong>replica</strong> which will reduce the time complexity to <em>O(1)</em> but consumes more resources in recording this replica. The third one is <strong>stack</strong> which follows ‘first in, last out’ rule. The last one called ‘magic wand’ is <strong>hash table</strong>, which can find a specific seat without any plus operation; </p>
+<p>The progress is simply showed as this picture:</p>
+<p><img src="/images/hash_table.jpg" alt="avatar"></p>
+<p>Such a progress is effective for small audience number, because all of them can be arranged on a unique position if <em>h</em> choose an <strong>ideal</strong> hash function. But when there are so many audience that no hash function work well to arrange them on unique position, collision will happen. So <em>collision</em> in hash progress defined that several keys will be mapped to a same slot.</p>
 <p>After briefly introduce the definition of hash function and collision, we will discuss <em>two most important things</em> in this chapter: </p>
 <ol>
 <li>How to choose an ideal hash function which can map each key <em>k</em> to an unique position in array as well as possible?</li>
 <li>How to solve the collision effectively, namely, in time complexity and space complexity?</li>
 </ol>
-<h3 id="Choose-a-good-hash-function"><a href="#Choose-a-good-hash-function" class="headerlink" title="Choose a good hash function"></a>Choose a good hash function</h3><p>If we wanna know what is a good hash function, we should know the criteria of a good hash function first:<br><br></p>
-<p> <em>Each key is equally likely to hash to any of the m slots, independently of where any other key has hashed to.</em></p>
-<p>But unfortunately we have no way to check this condition. Fortunately, we have found a universal class of hash function. Let me give its mathematical definition:</p>
-<p><img src="../_images/uni_hash.jpg" alt="avatar"></p>
+<h3 id="Choose-a-good-hash-function"><a href="#Choose-a-good-hash-function" class="headerlink" title="Choose a good hash function"></a>Choose a good hash function</h3><p>If we wanna know what is a good hash function, we should know the criteria of a good hash function first:</p>
+<p><em>Each key is equally likely to hash to any of the m slots, independently of where any other key has hashed to.</em></p>
+<p>But unfortunately we have no way to check this condition. Fortunately, we have found a universal class of hash function. Let me give its mathematical definition first:</p>
+<p><img src="/images/uni_hash.jpg" alt="avatar"></p>
 <p>So for all <em>a</em> and <em>b</em>, if <em>p</em> and <em>m</em> is given, we can find a set contains all hash function:</p>
-<p><img src="../_images/uni_hash_class.jpg" alt="avatar"></p>
+<p><img src="/images/uni_hash_class.jpg" alt="avatar"></p>
 <p>such that:</p>
 <p><img src="http://latex.codecogs.com/gif.latex?Z_%7Bp%7D%5E%7B*%7D=%5Cleft%7B0,%201,%20%5Cdots%20,%20p-1%20%5Cright%7D,%20Z_%7Bp%7D=%5Cleft%7B1,%20%5Cdots%20,%20p-1%20%5Cright%7D" alt=""></p>
 <p>You must want to ask: what is universal hash and what it can do?</p>
-<p>We all know that collision will occur when hashing. If collision occurs, collision-solver (whatever it is) will be called.<br>If <em>n</em> key map to one slot, the collision-solving’s time complexity will increase to <em>O(n)</em>. Universal hashing aims to resolve this problem by randomly choosing<br>hash function in a way that is independent of the keys that are actually going to be stored. </p>
-<p>But actually, collision still exist for big data set. So we should apply collision-solver to tackle this problem.<br>Two algorithms will be introduced: open-addressing and chaining</p>
-<h3 id="Chaining-and-Open-Addressing"><a href="#Chaining-and-Open-Addressing" class="headerlink" title="Chaining and Open-Addressing"></a>Chaining and Open-Addressing</h3><p>Chaining is to solve collision by storing all keys collide pairwise in a <em>linked list</em> which is as following picture:</p>
-<p><img src="../_images/chaining.jpg" alt="avatar"></p>
-<p>Open-Addressing is to solve collision by computing next position of the keys collided in a manner of <em>probe</em>. There are many probing algorithms, as we only introduce two commonly used:<br>Linear probing and Quadratic Probing; They work like following picture:</p>
-<p>![avatar](../_images/Linear Probing.jpg)<br><img src="../_images/Quadratic_Probing.jpg" alt="avatar"></p>
-<p>An important concept should be emphasized: <strong>load factor</strong>. The definition of load factor <em>a</em> is <em>a = n/m</em> such that <em>n</em> is the number of elements<br>and <em>m</em> is the size of hash table. Load factor represents the ratio between element’s number and hash table size. In practise, we almost predict the scale of usage to set the load factor (mostly we set <em>m = 2^31</em>).<br>We can infer from Calculus and Probability that the expected number of probes in a successful search is at most:<br><em>1/a ln(1/(1-a))</em>. In Java Library, HashMap class sets the load factor 0.75;</p>
+<p>We all know that collision will occur when hashing. If collision occurs, collision-solver (whatever it is) will be called. If <em>n</em> key map to one slot, the collision-solving’s time complexity will increase to <em>O(n)</em>. Universal hashing aims to resolve this problem by randomly choosing hash function in a way that is independent of the keys that are actually going to be stored. </p>
+<p>But actually, collision still exist for big data set. So we should apply collision-solver to tackle this problem. Two algorithms will be introduced: open-addressing and chaining</p>
+<h3 id="Chaining-and-Open-Addressing"><a href="#Chaining-and-Open-Addressing" class="headerlink" title="Chaining and Open-Addressing"></a>Chaining and Open-Addressing</h3><h4 id="Chaining"><a href="#Chaining" class="headerlink" title="Chaining"></a>Chaining</h4><p>Chaining is to solve collision by storing all keys collide pairwise in a <em>linked list</em> which is as following picture:</p>
+<p><img src="/images/chaining.jpg" alt="avatar"></p>
+<h4 id="Open-Addressing"><a href="#Open-Addressing" class="headerlink" title="Open-Addressing"></a>Open-Addressing</h4><p>Open-Addressing is to solve collision by computing next position of the keys collided in a manner of <em>probe</em>. There are many probing algorithms, as we only introduce two commonly used:<br><strong>Linear probing</strong> and <strong>Quadratic Probing</strong>; They work like following picture:</p>
+<p><img src="/images/Linear_Probing.jpg" alt="avatar"><br><img src="/images/Quadratic_Probing.jpg" alt="avatar"></p>
+<h4 id="Load-Factor"><a href="#Load-Factor" class="headerlink" title="Load Factor"></a>Load Factor</h4><p>An important concept should be emphasized: <strong>load factor</strong>. The definition of load factor <em>a</em> is <em>a = n/m</em> such that <em>n</em> is the number of elements<br>and <em>m</em> is the size of hash table. Load factor represents the ratio between element’s number and hash table size. In practise, we almost predict the scale of usage to set the load factor (mostly we set <em>m = 2^31</em>).<br>We can infer from Calculus and Probability that the expected number of probes in a successful search is at most: <em>1/a ln(1/(1-a))</em>. In Java Library, HashMap class sets the load factor 0.75.</p>
 
       
     </div>
@@ -367,15 +370,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/10/22/Operating%20System%20Notes%20(1)/" rel="next" title="Operating System Notes (1)">
-                <i class="fa fa-chevron-left"></i> Operating System Notes (1)
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/01/02/Machine%20Learning%20Notes%20(1):%20K-NN%20Algorithm%20and%20implementation/" rel="prev" title="Machine Learning Notes (1): K-NN Algorithm and implementation">
+                Machine Learning Notes (1): K-NN Algorithm and implementation <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -450,9 +453,9 @@
             
               <div class="site-state-item site-state-posts">
               
-                <a href="/archives/%20%7C%7C%20archive">
+                <a href="/archives">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -489,7 +492,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Learning-Data-Structure-1-：-Hash-Table"><span class="nav-number">1.</span> <span class="nav-text">Learning Data Structure(1)： Hash Table</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">1.1.</span> <span class="nav-text">Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#What-is-Hash-Table"><span class="nav-number">1.1.1.</span> <span class="nav-text">What is Hash Table?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Core-concepts"><span class="nav-number">1.1.2.</span> <span class="nav-text">Core concepts</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hash-Function-and-Collision"><span class="nav-number">1.2.</span> <span class="nav-text">Hash Function and Collision</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Choose-a-good-hash-function"><span class="nav-number">1.2.1.</span> <span class="nav-text">Choose a good hash function</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Chaining-and-Open-Addressing"><span class="nav-number">1.2.2.</span> <span class="nav-text">Chaining and Open-Addressing</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#What-is-Hash-Table"><span class="nav-number">1.1.</span> <span class="nav-text">What is Hash Table?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Core-concepts"><span class="nav-number">1.2.</span> <span class="nav-text">Core concepts</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hash-Function-and-Collision"><span class="nav-number">2.</span> <span class="nav-text">Hash Function and Collision</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Choose-a-good-hash-function"><span class="nav-number">2.1.</span> <span class="nav-text">Choose a good hash function</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Chaining-and-Open-Addressing"><span class="nav-number">2.2.</span> <span class="nav-text">Chaining and Open-Addressing</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Chaining"><span class="nav-number">2.2.1.</span> <span class="nav-text">Chaining</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Open-Addressing"><span class="nav-number">2.2.2.</span> <span class="nav-text">Open-Addressing</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Load-Factor"><span class="nav-number">2.2.3.</span> <span class="nav-text">Load Factor</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

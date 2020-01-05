@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="IntroductionIn Computer System, unit of information storage and the arithmetic operated on the data stored in such unit are composed of two basic components of a Computer System’s function. We will se">
+<meta name="keywords" content="Artificial Intelligence, Python , RecSys, Computer Science">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Operating System Notes (1): Representing and Manipulating Information">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;01&#x2F;05&#x2F;Operating%20System%20Notes%20(1):%20Representing%20and%20Manipulating%20Information&#x2F;index.html">
+<meta property="og:site_name" content="Jason&#39;s Home">
+<meta property="og:description" content="IntroductionIn Computer System, unit of information storage and the arithmetic operated on the data stored in such unit are composed of two basic components of a Computer System’s function. We will se">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http:&#x2F;&#x2F;latex.codecogs.com&#x2F;gif.latex?%5Cfrac%7B2%5E%7B32%7D%7D%7B2%5E30%7D=4">
+<meta property="og:image" content="http:&#x2F;&#x2F;latex.codecogs.com&#x2F;gif.latex?%5Cleft%5B%20x_%7Bw-1%7D,%20x_%7Bw-1%7D,%20%5Cdots%20,%20x_%7B0%7D%20%5Cright%5D">
+<meta property="og:image" content="http:&#x2F;&#x2F;latex.codecogs.com&#x2F;gif.latex?%5Cleft%5Bx_%7Bw-1%7D,%20x_%7Bw-1%7D,%20%5Cdots%20,%20x_%7Bw-8%7D%5Cright%5D">
+<meta property="og:image" content="http:&#x2F;&#x2F;latex.codecogs.com&#x2F;gif.latex?%5Cleft%5Bx_%7B7%7D,%20x_%7B6%7D,%20%5Cdots%20,%20x_%7B0%7D%5Cright%5D">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;unsigned_integer_rep.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;two_complement.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;latex.codecogs.com&#x2F;gif.latex?x_%7Bw-1%7D">
+<meta property="og:image" content="http:&#x2F;&#x2F;latex.codecogs.com&#x2F;gif.latex?%5E%7Bu%7D_%7Bw%7Dy">
+<meta property="og:image" content="http:&#x2F;&#x2F;latex.codecogs.com&#x2F;gif.latex?2%5E%7Bw%7D">
+<meta property="og:image" content="http:&#x2F;&#x2F;latex.codecogs.com&#x2F;gif.latex?%5Cleft%5B0,%5C2%5E%7Bw%7D%5Cright%5D">
+<meta property="og:image" content="http:&#x2F;&#x2F;latex.codecogs.com&#x2F;gif.latex?2%5E%7Bw%7D">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;plus_unsigned_int.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;latex.codecogs.com&#x2F;gif.latex?-%5Eu_wy=%5Cbegin%7Bcases%7Dy&amp;%7By=0%7D%5C%5C2%5Ew-y&amp;%7By%3E0%7D%5Cend%7Bcases%7D">
+<meta property="og:image" content="http:&#x2F;&#x2F;latex.codecogs.com&#x2F;gif.latex?x*%5Eu_wy=%5Cleft(x%5Ccdot&amp;y%5Cmod&amp;2%5Ew%5Cright)">
+<meta property="og:updated_time" content="2020-01-05T02:43:25.830Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;latex.codecogs.com&#x2F;gif.latex?%5Cfrac%7B2%5E%7B32%7D%7D%7B2%5E30%7D=4">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/01/05/Operating System Notes (1): Representing and Manipulating Information/"/>
+
+
+
+
+
+  <title>Operating System Notes (1): Representing and Manipulating Information | Jason's Home</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Jason's Home</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">A RecSys Engineerer, a young man love literature and arts who wanna live with his own heart</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/05/Operating%20System%20Notes%20(1):%20Representing%20and%20Manipulating%20Information/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jason Yi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jason's Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Operating System Notes (1): Representing and Manipulating Information</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-01-05T10:43:25+08:00">
+                2020-01-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>In Computer System, unit of information storage and the arithmetic operated on the data stored in such unit are composed of two basic components of a Computer System’s function. We will see what is Byte and how to implement mathematical computing in computer (more commonly, in all micro-systems)</p>
+<h1 id="Core-Concepts"><a href="#Core-Concepts" class="headerlink" title="Core Concepts"></a>Core Concepts</h1><ol>
+<li>Byte, word size and Byte ordering;</li>
+<li>Representation of positive and negative number in computer;</li>
+<li>Arithmetic like plus, minus, multiply and divide;</li>
+</ol>
+<a id="more"></a>
+
+<h2 id="Basic-Unit-of-Information-Storage-in-Computer"><a href="#Basic-Unit-of-Information-Storage-in-Computer" class="headerlink" title="Basic Unit of Information Storage in Computer"></a>Basic Unit of Information Storage in Computer</h2><p>In Physics, each matter are constructed by numerous extremely tiny kuake, these things create our world. It is the same in computer system where the smallest unit of data is <strong>Byte</strong>. Although binary 0, 1 we called <strong>bit</strong> is actually the smallest one, the binary sequence will be too complicated to analyze if they are long enough and mostly important, data cannot be manipulated in an easy way. </p>
+<p>So what is Byte? Simply answer, an <em>abstraction</em> of binary sequence with given length: </p>
+<p><strong>Byte</strong>: 8 bit binary</p>
+<p>Byte actually is not the real data, all data are in binary sequence form no matter they are invisible or visible. Byte is a form of abstraction which can stand for different data type and help us to simplify the problems will be discussed next. </p>
+<p>So in all program language, different data types correspond to different byte size. By the way, we often hear about <em>pointer</em> in many programming language whose compiler developed by C or C++ like Java or Python. But what a pointer mean? Most developers know that pointer points to a specific memory address. But if you forget to initialize it, it will be a NULL and point to an unknown sphere that you never know where it is. Since pointer abstracts address, why it sometime invalid?</p>
+<p>What I mean is it is not correct to say pointer is for abstracting memory-addressing which is only a superficial property. The truth is that pointer <em>defines a variable’s data type and value</em> instead of memory address. </p>
+<p><strong>Two means of pointer in C</strong>: <em>type</em> and <em>value</em> </p>
+<h2 id="Word-Size-and-Byte-Ordering"><a href="#Word-Size-and-Byte-Ordering" class="headerlink" title="Word Size and Byte Ordering"></a>Word Size and Byte Ordering</h2><h3 id="Word-Size"><a href="#Word-Size" class="headerlink" title="Word Size"></a>Word Size</h3><p>System Bit which represents the size of integer and pointer namely. </p>
+<p>Word size determines the capacity of virtual memory space. For example, for a 32-bit operating system, we choose 8 bit for a word size (1 byte). If we use <strong>M</strong>, <strong>G</strong> to represent big number, then 32-bit operating system can ‘store’ <img src="http://latex.codecogs.com/gif.latex?%5Cfrac%7B2%5E%7B32%7D%7D%7B2%5E30%7D=4" alt=""> Gb data in maximum . I plus a reference symbol on store because in operating system, virtual memory is the abstraction for memory management and physical memory is invisible to developers.</p>
+<h3 id="Byte-Ordering"><a href="#Byte-Ordering" class="headerlink" title="Byte Ordering"></a>Byte Ordering</h3><p>Computer should do two things when a program objects span multiple byte: addressing and byte ordering. Addressing will be introduced in a specific article (such a progress is a little complicated), I will tell you what is byte ordering briefly first.</p>
+<p>Byte ordering, namely, is to set the byte in an ordered sequence with some rules. Two byte ordering algorithms is used widely in existing machine: <strong>little endian</strong> and <strong>big endian</strong> </p>
+<p>Each bit has its own significant. An object’s binary representation is a sequence which has been ordered descent:</p>
+<p><img src="http://latex.codecogs.com/gif.latex?%5Cleft%5B%20x_%7Bw-1%7D,%20x_%7Bw-1%7D,%20%5Cdots%20,%20x_%7B0%7D%20%5Cright%5D" alt=""></p>
+<p>if <em>w</em> is times to 8, then such sequence can be represented as <em>byte order</em>. The byte with highest significant is: </p>
+<p><img src="http://latex.codecogs.com/gif.latex?%5Cleft%5Bx_%7Bw-1%7D,%20x_%7Bw-1%7D,%20%5Cdots%20,%20x_%7Bw-8%7D%5Cright%5D" alt=""></p>
+<p>Byte with lowest significant is:</p>
+<p><img src="http://latex.codecogs.com/gif.latex?%5Cleft%5Bx_%7B7%7D,%20x_%7B6%7D,%20%5Cdots%20,%20x_%7B0%7D%5Cright%5D" alt=""></p>
+<h3 id="Two-Sort-Manner"><a href="#Two-Sort-Manner" class="headerlink" title="Two Sort Manner"></a>Two Sort Manner</h3><ol>
+<li>Little endian: Byte with lowest significant will come first which is mostly used in <em>Intel compatible machine</em>;</li>
+<li>Big endian; Byte with biggest significant will come first which is mostly used in <em>IBM</em> and <em>Sun MicroSystem</em>;</li>
+</ol>
+<h3 id="Circumstance-will-consider-Byte-Ordering"><a href="#Circumstance-will-consider-Byte-Ordering" class="headerlink" title="Circumstance will consider Byte Ordering"></a>Circumstance will consider Byte Ordering</h3><p><em>Byte ordering is totally invisible to developers in developing applications in most times. Only three conditions should be took into consideration:</em></p>
+<ol>
+<li>Communicating between two different machines;</li>
+<li>Get the value of an integer data from assemble code by reviewing byte sequence;</li>
+<li>Program find a way to avoid the default Byte Ordering manner;</li>
+</ol>
+<h2 id="Representation-of-Integer-in-Computer"><a href="#Representation-of-Integer-in-Computer" class="headerlink" title="Representation of Integer in Computer"></a>Representation of Integer in Computer</h2><p>Integer has two type: unsigned and signed. Unsigned equals to positive in math and signed is negative.</p>
+<h3 id="Unsigned-Integer"><a href="#Unsigned-Integer" class="headerlink" title="Unsigned Integer"></a>Unsigned Integer</h3><p><img src="/images/unsigned_integer_rep.png" alt="avatar"></p>
+<h3 id="Signed-Integer"><a href="#Signed-Integer" class="headerlink" title="Signed Integer"></a>Signed Integer</h3><h4 id="Two’s-Complement-form"><a href="#Two’s-Complement-form" class="headerlink" title="Two’s-Complement form"></a>Two’s-Complement form</h4><p>Binary to Two’s-Complement</p>
+<p><img src="/images/two_complement.png" alt="avatar"></p>
+<p>such that <img src="http://latex.codecogs.com/gif.latex?x_%7Bw-1%7D" alt=""> is <strong>sign bit</strong></p>
+<h2 id="Arithmetic-of-Integer"><a href="#Arithmetic-of-Integer" class="headerlink" title="Arithmetic of Integer"></a>Arithmetic of Integer</h2><h3 id="Arithmetic-for-unsigned-Integer"><a href="#Arithmetic-for-unsigned-Integer" class="headerlink" title="Arithmetic for unsigned Integer"></a>Arithmetic for unsigned Integer</h3><p>If we have a system with word size <em>w</em> we can regard all arithmetic for unsigned integer as <em>mod</em> operation. we use <img src="http://latex.codecogs.com/gif.latex?%5E%7Bu%7D_%7Bw%7Dy" alt=""> to represent unsigned integer with word size <em>w</em>. </p>
+<h4 id="Plus-Arithmetic"><a href="#Plus-Arithmetic" class="headerlink" title="Plus Arithmetic"></a>Plus Arithmetic</h4><p>Because our system’s word size is <em>w</em>, the biggest unsigned integer we can get is <img src="http://latex.codecogs.com/gif.latex?2%5E%7Bw%7D" alt="">. So if we have a result bigger than it, our system fails to represent it correctly because the bits this result required out of word size. Such a phenomenon is called <strong>overflow</strong> which means the result calculated over the maximum word size can represent.</p>
+<p>How can we resolve overflow? The only way is to restrain the calculated result in the range of <img src="http://latex.codecogs.com/gif.latex?%5Cleft%5B0,%5C2%5E%7Bw%7D%5Cright%5D" alt=""> by minus <img src="http://latex.codecogs.com/gif.latex?2%5E%7Bw%7D" alt=""> like the second formula. </p>
+<p>Then in conclusion, the plus arithmetic can be represented in math form:</p>
+<p><img src="/images/plus_unsigned_int.png" alt="avatar"></p>
+<h3 id="Minus-Arithmetic"><a href="#Minus-Arithmetic" class="headerlink" title="Minus Arithmetic"></a>Minus Arithmetic</h3><p>We all know minus is the inverse of plus in math so as in computer. However in our system, the capability to represent a integer is constrained in <em>w</em> bits. Not like math, minus definition in our system is <img src="http://latex.codecogs.com/gif.latex?-%5Eu_wy=%5Cbegin%7Bcases%7Dy&%7By=0%7D%5C%5C2%5Ew-y&%7By%3E0%7D%5Cend%7Bcases%7D" alt=""> if we see minus as plus, try to take this symbol in plus formula and you will get the right answer.</p>
+<h3 id="Multiply-Arithmetic"><a href="#Multiply-Arithmetic" class="headerlink" title="Multiply Arithmetic"></a>Multiply Arithmetic</h3><p>As I said before, in our system, all arithmetic can be viewed as <em>mod</em> operation. So multiply can be formulated as: <img src="http://latex.codecogs.com/gif.latex?x*%5Eu_wy=%5Cleft(x%5Ccdot&y%5Cmod&2%5Ew%5Cright)" alt=""></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/01/02/Machine%20Learning%20Notes%20(1):%20K-NN%20Algorithm%20and%20implementation/" rel="next" title="Machine Learning Notes (1): K-NN Algorithm and implementation">
+                <i class="fa fa-chevron-left"></i> Machine Learning Notes (1): K-NN Algorithm and implementation
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/01/05/Machine%20Learning%20Notes%20(2):%20PCA%20and%20SVD/" rel="prev" title="Machine Learning Notes (2): PCA and SVD">
+                Machine Learning Notes (2): PCA and SVD <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Jason Yi</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Core-Concepts"><span class="nav-number">2.</span> <span class="nav-text">Core Concepts</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic-Unit-of-Information-Storage-in-Computer"><span class="nav-number">2.1.</span> <span class="nav-text">Basic Unit of Information Storage in Computer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Word-Size-and-Byte-Ordering"><span class="nav-number">2.2.</span> <span class="nav-text">Word Size and Byte Ordering</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Word-Size"><span class="nav-number">2.2.1.</span> <span class="nav-text">Word Size</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Byte-Ordering"><span class="nav-number">2.2.2.</span> <span class="nav-text">Byte Ordering</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Two-Sort-Manner"><span class="nav-number">2.2.3.</span> <span class="nav-text">Two Sort Manner</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Circumstance-will-consider-Byte-Ordering"><span class="nav-number">2.2.4.</span> <span class="nav-text">Circumstance will consider Byte Ordering</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Representation-of-Integer-in-Computer"><span class="nav-number">2.3.</span> <span class="nav-text">Representation of Integer in Computer</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Unsigned-Integer"><span class="nav-number">2.3.1.</span> <span class="nav-text">Unsigned Integer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Signed-Integer"><span class="nav-number">2.3.2.</span> <span class="nav-text">Signed Integer</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Two’s-Complement-form"><span class="nav-number">2.3.2.1.</span> <span class="nav-text">Two’s-Complement form</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Arithmetic-of-Integer"><span class="nav-number">2.4.</span> <span class="nav-text">Arithmetic of Integer</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Arithmetic-for-unsigned-Integer"><span class="nav-number">2.4.1.</span> <span class="nav-text">Arithmetic for unsigned Integer</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Plus-Arithmetic"><span class="nav-number">2.4.1.1.</span> <span class="nav-text">Plus Arithmetic</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Minus-Arithmetic"><span class="nav-number">2.4.2.</span> <span class="nav-text">Minus Arithmetic</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Multiply-Arithmetic"><span class="nav-number">2.4.3.</span> <span class="nav-text">Multiply Arithmetic</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jason Yi</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
