@@ -79,20 +79,18 @@
 
 
 
-<meta name="description" content="IntroductionPCA and SVD are two widely used dimensional reduction techniques. Dimension Reduction, namely, is to save the information from origin data as much as possible and reduce the attributes tha">
+<meta name="description" content="IntroductionWe all know that computers execute machine code which is a sequence of bytes encoding the low-level operations that manipulate data, manage memory, read and write data on storage device an">
 <meta name="keywords" content="Artificial Intelligence, Python , RecSys, Computer Science">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Machine Learning Notes (2): PCA and SVD">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;01&#x2F;05&#x2F;Machine%20Learning%20Notes%20(2):%20PCA%20and%20SVD&#x2F;index.html">
+<meta property="og:title" content="Operating System Notes (2): Processor Architecture and Machine Level Representation of Program">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;03&#x2F;07&#x2F;Operating%20System%20Notes%20(2):%20Processor%20Architecture%20and%20Machine%20Level%20Representation%20of%20Program&#x2F;index.html">
 <meta property="og:site_name" content="Jason&#39;s Home">
-<meta property="og:description" content="IntroductionPCA and SVD are two widely used dimensional reduction techniques. Dimension Reduction, namely, is to save the information from origin data as much as possible and reduce the attributes tha">
+<meta property="og:description" content="IntroductionWe all know that computers execute machine code which is a sequence of bytes encoding the low-level operations that manipulate data, manage memory, read and write data on storage device an">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http:&#x2F;&#x2F;latex.codecogs.com&#x2F;gif.latex?%5Cboldsymbol%7BA%7D=%5Csum_%7Bi=1%7D%5E%7Brank(A)%7D%7B%5Csigma_i%5Cboldsymbol%7Bu%7D_i%5Cboldsymbol%7Bv%7D_i%5ET%7D=%5Cboldsymbol%7BU%7D%5Cboldsymbol%7B%5CSigma%7D%5Cboldsymbol%7BV%7D%5ET">
-<meta property="og:image" content="http:&#x2F;&#x2F;latex.codecogs.com&#x2F;gif.latex?%5Cboldsymbol%7BU%7D=%5Cleft%5B%5Cboldsymbol%7Bu%7D_1,%5Cdots,%5Cboldsymbol%7Bu%7D_r%5Cright%5D,%5Cboldsymbol%7BV%7D=%5Cleft%5B%5Cboldsymbol%7Bv%7D_1,%5Cdots,%5Cboldsymbol%7Bv%7D_r%5Cright%5D">
-<meta property="og:image" content="http:&#x2F;&#x2F;latex.codecogs.com&#x2F;gif.latex?%5CSigma=(%5Csigma_i)_%7Br%5Ctimes&amp;r%7D">
-<meta property="og:updated_time" content="2020-01-05T14:02:46.284Z">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;03&#x2F;07&#x2F;images&#x2F;OS_Notes_2&#x2F;ia32_sample.png">
+<meta property="og:updated_time" content="2020-03-07T04:40:54.230Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http:&#x2F;&#x2F;latex.codecogs.com&#x2F;gif.latex?%5Cboldsymbol%7BA%7D=%5Csum_%7Bi=1%7D%5E%7Brank(A)%7D%7B%5Csigma_i%5Cboldsymbol%7Bu%7D_i%5Cboldsymbol%7Bv%7D_i%5ET%7D=%5Cboldsymbol%7BU%7D%5Cboldsymbol%7B%5CSigma%7D%5Cboldsymbol%7BV%7D%5ET">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;03&#x2F;07&#x2F;images&#x2F;OS_Notes_2&#x2F;ia32_sample.png">
 
 
 
@@ -122,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/01/05/Machine Learning Notes (2): PCA and SVD/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/03/07/Operating System Notes (2): Processor Architecture and Machine Level Representation of Program/"/>
 
 
 
 
 
-  <title>Machine Learning Notes (2): PCA and SVD | Jason's Home</title>
+  <title>Operating System Notes (2): Processor Architecture and Machine Level Representation of Program | Jason's Home</title>
   
 
 
@@ -235,7 +233,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/05/Machine%20Learning%20Notes%20(2):%20PCA%20and%20SVD/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/07/Operating%20System%20Notes%20(2):%20Processor%20Architecture%20and%20Machine%20Level%20Representation%20of%20Program/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jason Yi">
@@ -252,7 +250,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Machine Learning Notes (2): PCA and SVD</h1>
+          <h1 class="post-title" itemprop="name headline">Operating System Notes (2): Processor Architecture and Machine Level Representation of Program</h1>
         
 
         <div class="post-meta">
@@ -264,8 +262,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-01-05T22:02:46+08:00">
-                2020-01-05
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-07T12:40:54+08:00">
+                2020-03-07
               </time>
             
 
@@ -302,52 +300,126 @@
       
 
       
-        <h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>PCA and SVD are two widely used dimensional reduction techniques. Dimension Reduction, namely, is to save the information from origin data as much as possible and reduce the attributes that the data has as less as possible. PCA and SVD are closely related and the difference between them is that SVD still have the means of data opposite to PCA;</p>
-<h1 id="Core-Concept"><a href="#Core-Concept" class="headerlink" title="Core Concept"></a>Core Concept</h1><ol>
-<li>Principle Component Analysis (PCA);</li>
-<li>Singular Value Decomposition (SVD);</li>
+        <h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>We all know that computers execute <em>machine code</em> which is a sequence of bytes encoding the low-level operations that manipulate data, manage memory, read and write data on storage device and communicate over networks. Machine-level code, also called <em>assembly code</em>, is generated by compiler depend on different operating system. But as <em>abstraction</em> is an important notation in Computer Science, many high-level programming languages enable developers to neglect the assembly code layer for distinct standards in different platforms to improve developing efficiency and put more emphasis on practical tech schema.</p>
+<p>However, in some specific conditions like compiler optimization should take assembly layer into consideration because more effective organization of assembly code will achieve better performance which will influence the higher level architecture a lot. Plus, in <em>reverse engineering</em> decompile from machine code need to understand assembly code. </p>
+<p>So what consists of assembly code? Since assembly code is a kind of programming language, employing different forms of abstraction and hiding details of implementation thorough the use of simpler, abstract model is two important properties for assembly code. The basic component of assembly code is instruction, instruction defines operation and processor state so that assembly code is equivalent to the composition of <em>instruction set architecture</em> which defines the <em>processor state</em>, <em>the format of instructions</em> and <em>their effect on processor state</em>. </p>
+<p>A program can be viewed as a sequence of instruction and processor executes them one by one. But programs executed concurrently is one of the most critical characteristics in modern operating system. Multi-core architecture can ensure that in the same time there are several processors are running simultaneously. But for one core, how to improve the performance of concurrency? In most modern CPU architecture, sequential pipeline becomes a necessary component. The basic idea of pipeline is that instruction sequence execution can be split into several stages and processor can simultaneously execute different stages for different program to increase <em>throughout</em> of the system, that is, the number of *”customer”* served per unit time. </p>
+<p>Generally, processing instruction involves a number of operations. We can organize them in a particular sequence of stages. Although instructions differ greatly in their actions, they are all executed in a uniform sequence. Let’s see the processing stages briefly: </p>
+<p><strong>Fetch</strong> -&gt; <strong>Decode</strong> -&gt; <strong>Execute</strong> -&gt; <strong>Memory</strong> -&gt;<strong>Write Back</strong> -&gt; <strong>PC update</strong></p>
+<p>In general, <strong>Compiler</strong> -&gt; <strong>Linker</strong> -&gt; <strong>Instruction Set Architecture</strong> -&gt; <strong>Assembly code</strong> -&gt; <strong>Sequential stages</strong> -&gt; <strong>Pipeline</strong> is the progress of source code executed in operating system. Compile is not our main point and linking will be introduced in another note. </p>
+<p>In this note, we will introduce these concepts: </p>
+<ol>
+<li>IA32 Instruction Set Architecture (ISA);</li>
+<li>Y86 Processor: Sequential and Pipeline implementation on the foundation of IA32; </li>
 </ol>
 <a id="more"></a>
-
-<h1 id="Principle-Component-Analysis"><a href="#Principle-Component-Analysis" class="headerlink" title="Principle Component Analysis"></a>Principle Component Analysis</h1><p>The goal of PCA is to find a new set of dimensions that better captures the variability of data. Several appealing characteristics PCA has:</p>
-<ol>
-<li>Tends to identify the strongest patterns in the data (so that PCA can be used as a pattern-finding technique);</li>
-<li>Most of the variability can be captured by a small fraction of the total set of dimensions;</li>
-<li>Eliminating much of the noise if noise in the data is weaker than the pattern;</li>
-</ol>
-<p>Let’s see some PCA’s detail first. </p>
-<h2 id="Details-of-PCA"><a href="#Details-of-PCA" class="headerlink" title="Details of PCA"></a>Details of PCA</h2><p>The goal of PCA is to find a transformation of data that satisfies:</p>
-<ol>
-<li>Each pair of new attributes have 0 covariance;</li>
-<li>The attributes are ordered with respect to how much of the variance of the data each attribute captures;</li>
-<li>The first attribute captures as much of the variance of the data as possible;;</li>
-</ol>
-<p>The progress of PCA is:</p>
-<ol>
-<li>Calculate the covariance matrix <strong>S</strong> for the attributes of data set <strong>D</strong>;</li>
-<li>Calculate the matrix <strong>U</strong> which is composed by eigenvectors of <strong>S</strong>;</li>
-<li>Calculate the linear transformation <strong>D’</strong> = <strong>DU</strong>, then <strong>D’</strong> is the new transformed data set. Therefor we reduce the dimension to <em>k</em> (the number of eigenvalues);</li>
-</ol>
-<h1 id="Singular-Value-Decomposition"><a href="#Singular-Value-Decomposition" class="headerlink" title="Singular Value Decomposition"></a>Singular Value Decomposition</h1><p>Singular Value Decomposition is a highlight in linear algebra. If we want to diagonalize a <em>m x n</em> matrix <em>A</em>, we cannot use eigenvectors because they are usually not orthogonal, not enough and requires <em>A</em> to be a square matrix. SVD solve these problems in a perfect way. </p>
-<p>SVD tries to decompose a <em>m x n</em> matrix <em>A</em> in a from:</p>
-<p><img src="http://latex.codecogs.com/gif.latex?%5Cboldsymbol%7BA%7D=%5Csum_%7Bi=1%7D%5E%7Brank(A)%7D%7B%5Csigma_i%5Cboldsymbol%7Bu%7D_i%5Cboldsymbol%7Bv%7D_i%5ET%7D=%5Cboldsymbol%7BU%7D%5Cboldsymbol%7B%5CSigma%7D%5Cboldsymbol%7BV%7D%5ET" alt=""></p>
-<p>such that:</p>
-<p><img src="http://latex.codecogs.com/gif.latex?%5Cboldsymbol%7BU%7D=%5Cleft%5B%5Cboldsymbol%7Bu%7D_1,%5Cdots,%5Cboldsymbol%7Bu%7D_r%5Cright%5D,%5Cboldsymbol%7BV%7D=%5Cleft%5B%5Cboldsymbol%7Bv%7D_1,%5Cdots,%5Cboldsymbol%7Bv%7D_r%5Cright%5D" alt=""></p>
-<p><img src="http://latex.codecogs.com/gif.latex?%5CSigma=(%5Csigma_i)_%7Br%5Ctimes&r%7D" alt=""></p>
-<p>With all these mathematical tools, if we have a data set <strong>D</strong>, we can reduce its attributes like:</p>
-<ol>
-<li>Compute the left singular value <strong>U</strong> of <strong>D</strong> and its right singular value <strong>V</strong>;</li>
-<li>Compute the matrix <strong>D’</strong> = <strong>DV</strong>, then <strong>D’</strong> is the new transformed data we want. Therefore we reduce data set’s dimension to <em>r</em>;</li>
-</ol>
-<p>SVD has following properties:</p>
-<ol>
-<li>Right singular vectors, i.e., the columns of <strong>V</strong> captures patterns among the attributes;</li>
-<li>Left singular vectors, i.e., the columns of <strong>U</strong> captures patterns among the objects; </li>
-</ol>
-<h1 id="Take-a-closer-look-on-PCA-and-SVD"><a href="#Take-a-closer-look-on-PCA-and-SVD" class="headerlink" title="Take a closer look on PCA and SVD"></a>Take a closer look on PCA and SVD</h1><ol>
-<li>PCA and SVD are closely related viewed from linear algebra because they are both matrix decomposition techniques.</li>
-<li>After processed by PCA, the new set of attributes are linear uncorrelated, but SVD maybe not;   </li>
-</ol>
+<h1 id="IA32-ISA"><a href="#IA32-ISA" class="headerlink" title="IA32 ISA"></a>IA32 ISA</h1><h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><p>A simple example of IA32 program is as follows:</p>
+<p><img src="../images/OS_Notes_2/ia32_sample.png" alt="avatar"></p>
+<p>Two basic elements: <em>instructions with particular actions</em> and <em>their objective integer registers</em> </p>
+<h2 id="Several-kinds-of-instructions"><a href="#Several-kinds-of-instructions" class="headerlink" title="Several kinds of instructions"></a>Several kinds of instructions</h2><p>We will list some instructions of IA32</p>
+<table>
+<thead>
+<tr>
+<th>instruction</th>
+<th>Effect</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>popl</td>
+<td>Pop double word</td>
+<td>Move with zero extension</td>
+</tr>
+<tr>
+<td>pushl</td>
+<td>Push Double word</td>
+<td>Move with zero extension</td>
+</tr>
+<tr>
+<td>movl</td>
+<td>move double word</td>
+<td>Move</td>
+</tr>
+<tr>
+<td>addl</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>ret</td>
+<td>return</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>some registers will be listed as well. Register is   </p>
+<table>
+<thead>
+<tr>
+<th>Register</th>
+<th>definition</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>%ebp</td>
+<td>frame pointer, 32-bit</td>
+</tr>
+<tr>
+<td>%eax</td>
+<td>32-bit</td>
+</tr>
+<tr>
+<td>%edx</td>
+<td>32-bit</td>
+</tr>
+<tr>
+<td>%ecx</td>
+<td>32-bit</td>
+</tr>
+<tr>
+<td>%esi</td>
+<td>32-bit</td>
+</tr>
+<tr>
+<td>%edi</td>
+<td>32-bit</td>
+</tr>
+<tr>
+<td>%ah</td>
+<td>8-bit</td>
+</tr>
+<tr>
+<td>%al</td>
+<td>8-bit</td>
+</tr>
+<tr>
+<td>%esp</td>
+<td>stack pointer, 32-bit</td>
+</tr>
+<tr>
+<td>%dh</td>
+<td>8-bit</td>
+</tr>
+<tr>
+<td>%dl</td>
+<td>8-bit</td>
+</tr>
+<tr>
+<td>%bh</td>
+<td>8-bit</td>
+</tr>
+<tr>
+<td>%bl</td>
+<td>8-bit</td>
+</tr>
+<tr>
+<td>%ch</td>
+<td>8-bit</td>
+</tr>
+<tr>
+<td>%cl</td>
+<td>8-bit</td>
+</tr>
+</tbody></table>
 
       
     </div>
@@ -372,8 +444,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/01/05/Operating%20System%20Notes%20(1):%20Representing%20and%20Manipulating%20Information/" rel="next" title="Operating System Notes (1): Representing and Manipulating Information">
-                <i class="fa fa-chevron-left"></i> Operating System Notes (1): Representing and Manipulating Information
+              <a href="/2020/01/21/Machine%20Learning%20Notes%20(3):%20Logistic%20Regression/" rel="next" title="Machine Learning Notes (3): Logistic Regression">
+                <i class="fa fa-chevron-left"></i> Machine Learning Notes (3): Logistic Regression
               </a>
             
           </div>
@@ -382,8 +454,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/01/12/Machine%20Learning%20Notes%20(1):%20K-NN%20Algorithm%20and%20implementation/" rel="prev" title="Machine Learning Notes (1): K-NN Algorithm and implementation">
-                Machine Learning Notes (1): K-NN Algorithm and implementation <i class="fa fa-chevron-right"></i>
+              <a href="/2020/03/17/Learning%20Algorithm(1):%20QuickSort/" rel="prev" title="Learning Algorithm(1): QuickSort">
+                Learning Algorithm(1): QuickSort <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -498,7 +570,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Core-Concept"><span class="nav-number">2.</span> <span class="nav-text">Core Concept</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Principle-Component-Analysis"><span class="nav-number">3.</span> <span class="nav-text">Principle Component Analysis</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Details-of-PCA"><span class="nav-number">3.1.</span> <span class="nav-text">Details of PCA</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Singular-Value-Decomposition"><span class="nav-number">4.</span> <span class="nav-text">Singular Value Decomposition</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Take-a-closer-look-on-PCA-and-SVD"><span class="nav-number">5.</span> <span class="nav-text">Take a closer look on PCA and SVD</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IA32-ISA"><span class="nav-number">2.</span> <span class="nav-text">IA32 ISA</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Example"><span class="nav-number">2.1.</span> <span class="nav-text">Example</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Several-kinds-of-instructions"><span class="nav-number">2.2.</span> <span class="nav-text">Several kinds of instructions</span></a></li></ol></li></ol></div>
             
 
           </div>

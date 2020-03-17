@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="IntroductionLogistic Regression (LR) is a classical model for classification and regression which is widely used in Compute Vision, NLP and Recommending System. Its simple, effective and adaptive to b">
+<meta name="keywords" content="Artificial Intelligence, Python , RecSys, Computer Science">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Machine Learning Notes (3): Logistic Regression">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;01&#x2F;21&#x2F;Machine%20Learning%20Notes%20(3):%20Logistic%20Regression&#x2F;index.html">
+<meta property="og:site_name" content="Jason&#39;s Home">
+<meta property="og:description" content="IntroductionLogistic Regression (LR) is a classical model for classification and regression which is widely used in Compute Vision, NLP and Recommending System. Its simple, effective and adaptive to b">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http:&#x2F;&#x2F;latex.codecogs.com&#x2F;gif.latex?P%5Cleft(y=1%5Cmid&amp;x%5Cright)=1&#x2F;%5Cleft(1+e%5E%7B%5Cleft(-w%5Ccdot&amp;x+b%5Cright)%7D%5Cright)">
+<meta property="og:image" content="http:&#x2F;&#x2F;latex.codecogs.com&#x2F;gif.latex?P%5Cleft(y=0%5Cmid&amp;x%5Cright)=1&#x2F;%5Cleft(1+e%5E%7B%5Cleft(w%5Ccdot&amp;x+b%5Cright)%7D%5Cright)">
+<meta property="og:image" content="http:&#x2F;&#x2F;latex.codecogs.com&#x2F;gif.latex?L%5Cleft(w%5Cright)=%5Csum_%7Bi=1%7D%5E%7BN%7D%7B%5Cleft%5By_i%5Clog%7B%5Csigma%5Cleft(w%5Ccdot&amp;x_i%5Cright+b)+%5Cleft(1-y_i%5Cright)%5Clog%7B1-%5Csigma%5Cleft(w%5Ccdot&amp;x_i+b%5Cright)%7D%7D%5Cright%5D%7D">
+<meta property="og:image" content="http:&#x2F;&#x2F;latex.codecogs.com&#x2F;gif.latex?%5Csigma%5Cleft(x%5Cright)=1&#x2F;%5Cleft(1+e%5E%7B-x%7D%5Cright)">
+<meta property="og:image" content="http:&#x2F;&#x2F;latex.codecogs.com&#x2F;gif.latex?S=k%5Csum_%7Bi=1%7D%5EN%7Bp%5Cleft(x_i;%5Cbeta%5Cright)%5Cln&amp;p%5Cleft(x_i;%5Cbeta%5Cright)%7D">
+<meta property="og:image" content="http:&#x2F;&#x2F;latex.codecogs.com&#x2F;gif.latex?p%5Cleft(x_i;%5Cbeta%5Cright)">
+<meta property="og:image" content="http:&#x2F;&#x2F;latex.codecogs.com&#x2F;gif.latex?%5Cbeta=%5Cfrac%7B1%7D%7BkT%7D">
+<meta property="og:image" content="http:&#x2F;&#x2F;latex.codecogs.com&#x2F;gif.latex?p%5Cleft(x_i;%5Cbeta%5Cright)=%5Cexp%5Cleft(-%5Cbeta&amp;x_i%5Cright)&#x2F;%5Csum_r%7B%5Cexp%5Cleft(-%5Cbeta&amp;x_r%5Cright)%7D">
+<meta property="og:image" content="http:&#x2F;&#x2F;latex.codecogs.com&#x2F;gif.latex?S=-%5Csum_%7Bi=1%7D%5EN%7Bp_i%5Clog%5Cleft(p_i%5Cright)%7D">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;01&#x2F;21&#x2F;images&#x2F;fruits.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;01&#x2F;21&#x2F;images&#x2F;symbol_set.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;01&#x2F;21&#x2F;images&#x2F;probability.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;latex.codecogs.com&#x2F;gif.latex?p_k=%5Cfrac%7Bn_k%7D%7BN%7D,k=1,%5Cdots,n">
+<meta property="og:updated_time" content="2020-01-21T15:41:36.017Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;latex.codecogs.com&#x2F;gif.latex?P%5Cleft(y=1%5Cmid&amp;x%5Cright)=1&#x2F;%5Cleft(1+e%5E%7B%5Cleft(-w%5Ccdot&amp;x+b%5Cright)%7D%5Cright)">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/01/21/Machine Learning Notes (3): Logistic Regression/"/>
+
+
+
+
+
+  <title>Machine Learning Notes (3): Logistic Regression | Jason's Home</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Jason's Home</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">A RecSys Engineerer, a young man love literature and arts who wanna live with his own heart</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/21/Machine%20Learning%20Notes%20(3):%20Logistic%20Regression/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jason Yi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jason's Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Machine Learning Notes (3): Logistic Regression</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-01-21T23:41:36+08:00">
+                2020-01-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>Logistic Regression (LR) is a classical model for classification and regression which is widely used in Compute Vision, NLP and Recommending System. Its simple, effective and adaptive to both linear and nonlinear conditions. It is a <em>logarithmic linear model</em> as well as <em>Maximum Entropy</em> Model (MEM). MEM is a rule for statistic learning and generalized from Logistic Regression. </p>
+<p>In this article, I will introduce LR first, then generalize it to MEM. At last, I will introduce how to train LR and MEM by <em>IIS</em> and <em>Quasi-Newton Method</em>.</p>
+<p>In recent years, gradient decent and another optimizer like Adam becomes the main choices for training a ML and DL model. So I will also introduce Gradient Decent briefly but more details will be noted in another article.    </p>
+<h1 id="Core-Concepts"><a href="#Core-Concepts" class="headerlink" title="Core Concepts"></a>Core Concepts</h1><ol>
+<li>Logistic Regression and Maximum Entropy;</li>
+<li>IIS and Quasi-Newton Method;</li>
+<li>Gradient Decent;</li>
+</ol>
+<a id="more"></a>
+
+<h1 id="Logistic-Regression-LR"><a href="#Logistic-Regression-LR" class="headerlink" title="Logistic Regression (LR)"></a>Logistic Regression (LR)</h1><h2 id="Mathematical-Details"><a href="#Mathematical-Details" class="headerlink" title="Mathematical Details"></a>Mathematical Details</h2><p>LR is a binary classifier which will classify train set in two classes 0, 1 and predict a new instance with label 0, 1. The mathematical model of LR is simple: </p>
+<p><img src="http://latex.codecogs.com/gif.latex?P%5Cleft(y=1%5Cmid&x%5Cright)=1/%5Cleft(1+e%5E%7B%5Cleft(-w%5Ccdot&x+b%5Cright)%7D%5Cright)" alt=""></p>
+<p><img src="http://latex.codecogs.com/gif.latex?P%5Cleft(y=0%5Cmid&x%5Cright)=1/%5Cleft(1+e%5E%7B%5Cleft(w%5Ccdot&x+b%5Cright)%7D%5Cright)" alt=""></p>
+<p>The cost function of LR is: </p>
+<p><img src="http://latex.codecogs.com/gif.latex?L%5Cleft(w%5Cright)=%5Csum_%7Bi=1%7D%5E%7BN%7D%7B%5Cleft%5By_i%5Clog%7B%5Csigma%5Cleft(w%5Ccdot&x_i%5Cright+b)+%5Cleft(1-y_i%5Cright)%5Clog%7B1-%5Csigma%5Cleft(w%5Ccdot&x_i+b%5Cright)%7D%7D%5Cright%5D%7D" alt=""></p>
+<p>where</p>
+<p><img src="http://latex.codecogs.com/gif.latex?%5Csigma%5Cleft(x%5Cright)=1/%5Cleft(1+e%5E%7B-x%7D%5Cright)" alt=""></p>
+<p>called <strong>sigmoid function</strong>. It often occurs in Neural Network as an activate function. I will introduce deep learning in other articles.</p>
+<p>So how we decide which label a new instance is? Simply, according to the probability. For example, if we have <em>P</em>(<em>y</em>=1|<em>x</em>) = 0.4, <em>P</em>(<em>y</em>=0|<em>x</em>) = 0.6, then we can predict instance <em>x</em> as class 0. That’s we call 0.5 is <strong>decision boundary</strong>.   </p>
+<h2 id="Maximum-Entropy-Model-MEM"><a href="#Maximum-Entropy-Model-MEM" class="headerlink" title="Maximum Entropy Model (MEM)"></a>Maximum Entropy Model (MEM)</h2><p>Before we discuss MEM, let’s ask a simple question: what is entropy?</p>
+<p>Emmmmm, it’s absolutely abstract. Entropy is not firstly proposed by AI or CS researchers, even Shannon himself also transferred this concept from Statistical Physics. Ok, it seems more complicate when we talking about Physics. But describing a complicate thing in a simple way is Physics’s job. Simple way means abstraction.</p>
+<p>Seemingly we cannot escape from Physics. Let us see a Physical example at first, then I will introduce the strict definition of entropy in Shannon’s form. Finally I will also discuss some other entropy briefly. </p>
+<p>To avoid complexity, I will ignore many details and emphasize on concepts. In Physics, many micro-particles consist of a macro-system. A macro-system has several observable quantities like temperature, pressure and so on. But in microcosmic world, a particle’s status is not definite revealed by Schrodinger equation which has been discussed very thoroughly in Quantum Mechanics (if you’re interested in, you can read a book <em>Modern Quantum Mechanics</em> by <em>Sakurai J.J</em>). A particle’s status can only be represented by wave function (you can see it as particle’s probability density). So our problem is: <em>how to compute definite macro system’s quantities by indefinite quantum theory? and how can we get some parameter from these quantities which will decide particle’s status?</em></p>
+<p>Such a problem is extraordinary like many statistic problems: how can we compute some statistical quantities which can represent some central properties from a random dataset and how can we decide the distribution by several parameters.</p>
+<p>In Statistical Physics, Entropy is proposed to resolve this problem. It assumes a physical quantity entropy: </p>
+<p><img src="http://latex.codecogs.com/gif.latex?S=k%5Csum_%7Bi=1%7D%5EN%7Bp%5Cleft(x_i;%5Cbeta%5Cright)%5Cln&p%5Cleft(x_i;%5Cbeta%5Cright)%7D" alt=""></p>
+<p>where</p>
+<p><img src="http://latex.codecogs.com/gif.latex?p%5Cleft(x_i;%5Cbeta%5Cright)" alt=""> </p>
+<p>means <em>i</em>-th particle’s distribution determined by its energy and the parameter is a physical quantity with form:</p>
+<p><img src="http://latex.codecogs.com/gif.latex?%5Cbeta=%5Cfrac%7B1%7D%7BkT%7D" alt=""> </p>
+<p>where <em>k</em> is Boltzmann constant and <em>T</em> is temperature. </p>
+<p>In Statistical Physics, A particle’s probability in a given state can be represented as canonical distribution for a equilibrium canonical system in the form:</p>
+<p><img src="http://latex.codecogs.com/gif.latex?p%5Cleft(x_i;%5Cbeta%5Cright)=%5Cexp%5Cleft(-%5Cbeta&x_i%5Cright)/%5Csum_r%7B%5Cexp%5Cleft(-%5Cbeta&x_r%5Cright)%7D" alt=""></p>
+<p>Now, let us link Physical entropy with Information entropy. In Shannon’s theory, information entropy can be represented as:</p>
+<p><img src="http://latex.codecogs.com/gif.latex?S=-%5Csum_%7Bi=1%7D%5EN%7Bp_i%5Clog%5Cleft(p_i%5Cright)%7D" alt=""></p>
+<p>where the index <em>i</em> means the <em>i</em>-th element in a symbol set (a symbol set corresponds to a data sequence). The unit of information entropy is <strong>Bit</strong>. Yes, bit not means 0, 1 but a unit for information quantity. </p>
+<p>All right, entropy is an absolutely abstract notion which should take some time to understand it. Let’s forget these math formulas and see an example which can recover some properties of entropy. </p>
+<p>On day, a mathematician named Ellen wanted to buy some fruit. He went to shop to choose and shop-owner told him there are several kinds of fruit in his shop;</p>
+<p><img src="../images/fruits.png" alt="avatar"></p>
+<p>Ellen didn’t know how many he planed to buy for each kind fruit so he decided to select them randomly. But the total ‘number’ he hoped is fixed whatever the ‘number’ is. The problem is to create a measurement of the ‘number’ which could satisfy Ellen’s demand so that no matter how he selected fruit, this measurement could tell him just a single digit to help him to decide when to stop.</p>
+<p>Because he selected each kind of fruit randomly from a set, Ellen noted every kind as a symbol and he had a symbol set now:</p>
+<p><img src="../images/symbol_set.png" alt="avatar"></p>
+<p>Because only five kinds of fruit this shop had, <em>n</em>=5. Besides, Ellen applied probability notion in his theory, he wrote each symbol’s probability as:</p>
+<p><img src="../images/probability.png" alt="avatar"></p>
+<p>such that</p>
+<p><img src="http://latex.codecogs.com/gif.latex?p_k=%5Cfrac%7Bn_k%7D%7BN%7D,k=1,%5Cdots,n" alt=""></p>
+<p>where <em>n_k</em> is the amount of <em>k</em>‘s symbol selected and <em>N</em> is the size of the symbol set. The progress of selecting fruit randomly and put them in a buffet is a sort of <em>sampling without replacement</em>.</p>
+<p>Back to the problem we proposed before: is there a measurement which will reveal how many fruit Ellen has by a single digit? It’s difficult to resolve straightly. Expectation, diversion, all of these statistical properties fail to show a whole picture. However, if we      </p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/01/12/Machine%20Learning%20Notes%20(1):%20K-NN%20Algorithm%20and%20implementation/" rel="next" title="Machine Learning Notes (1): K-NN Algorithm and implementation">
+                <i class="fa fa-chevron-left"></i> Machine Learning Notes (1): K-NN Algorithm and implementation
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/03/07/Operating%20System%20Notes%20(2):%20Processor%20Architecture%20and%20Machine%20Level%20Representation%20of%20Program/" rel="prev" title="Operating System Notes (2): Processor Architecture and Machine Level Representation of Program">
+                Operating System Notes (2): Processor Architecture and Machine Level Representation of Program <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Jason Yi</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Core-Concepts"><span class="nav-number">2.</span> <span class="nav-text">Core Concepts</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Logistic-Regression-LR"><span class="nav-number">3.</span> <span class="nav-text">Logistic Regression (LR)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Mathematical-Details"><span class="nav-number">3.1.</span> <span class="nav-text">Mathematical Details</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maximum-Entropy-Model-MEM"><span class="nav-number">3.2.</span> <span class="nav-text">Maximum Entropy Model (MEM)</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jason Yi</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

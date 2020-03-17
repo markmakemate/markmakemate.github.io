@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Introductionk-NN (k-nearest neighbour) is a classification and regression model. The goal of k-NN is to find k nearest neighbours of an instance and label them a given class. The input is feature vect">
+<meta name="keywords" content="Artificial Intelligence, Python , RecSys, Computer Science">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Machine Learning Notes (1): K-NN Algorithm and implementation">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;01&#x2F;12&#x2F;Machine%20Learning%20Notes%20(1):%20K-NN%20Algorithm%20and%20implementation&#x2F;index.html">
+<meta property="og:site_name" content="Jason&#39;s Home">
+<meta property="og:description" content="Introductionk-NN (k-nearest neighbour) is a classification and regression model. The goal of k-NN is to find k nearest neighbours of an instance and label them a given class. The input is feature vect">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http:&#x2F;&#x2F;latex.codecogs.com&#x2F;gif.latex?T=%5Cleft%7B%5Cleft(x_1,y_1%5Cright),%5Cdots,%5Cleft(x_N,y_N%5Cright)%5Cright%7D,%5Cquad&amp;x_i%5Cin&amp;X,%5Cquad&amp;y_i%5Cin&amp;Y=%5Cleft%7Bc_1,%5Cdots,c_K%5Cright%7D">
+<meta property="og:image" content="http:&#x2F;&#x2F;latex.codecogs.com&#x2F;gif.latex?N_k%5Cleft(x%5Cright)">
+<meta property="og:image" content="http:&#x2F;&#x2F;latex.codecogs.com&#x2F;gif.latex?%5Carg%5Cmax_%7Bc_j%7D%5Csum_%7Bx_i%5Cin&amp;N_k(x)%7D%7BI(y_i=c_j)%7D,%5Cquad&amp;i=1,2,%5Cdots,N;%5Cquad&amp;j=1,2,%5Cdots,K">
+<meta property="og:image" content="http:&#x2F;&#x2F;latex.codecogs.com&#x2F;gif.latex?1-1&#x2F;k%5Csum_%7Bx_i%5Cin&amp;N_k(x)%7D%7BI(y_i=c_j)%7D">
+<meta property="og:image" content="http:&#x2F;&#x2F;latex.codecogs.com&#x2F;gif.latex?L_p%5Cleft(x_i,x_j%5Cright)=%5Cleft(%5Csum_%7Bm=1%7D%5E%7Bn%7D%5Cleft%7Cx_%7Bi%7D%5E%7Bm%7D-x_%7Bj%7D%5E%7Bm%7D%5Cright%7C%5Cright)%5E%7B1&#x2F;p%7D,%5Cquad&amp;x_i,x_j%5Cin&amp;%5CRe%5En">
+<meta property="og:image" content="http:&#x2F;&#x2F;latex.codecogs.com&#x2F;gif.latex?L_%7B%5Cinfty%7D%5Cleft(x_i,x_j%5Cright)=%5Cmax_%7Bm%7D%5Cleft%7Cx_%7Bi%7D%5E%7Bm%7D-x_%7Bj%7D%5E%7Bm%7D%5Cright%7C,%5Cquad&amp;x_i,x_j%5Cin&amp;%5CRe%5En">
+<meta property="og:image" content="http:&#x2F;&#x2F;latex.codecogs.com&#x2F;gif.latex?T=%5Cleft%7B%5Cleft(x_1,y_1%5Cright),%5Cdots,%5Cleft(x_N,y_N%5Cright)%5Cright%7D,%5Cquad&amp;x_i%5Cin&amp;X,%5Cquad&amp;y_i%5Cin&amp;Y=%5Cleft%7Bc_1,%5Cdots,c_K%5Cright%7D">
+<meta property="og:image" content="http:&#x2F;&#x2F;latex.codecogs.com&#x2F;gif.latex?N_k%5Cleft(x%5Cright)">
+<meta property="og:image" content="http:&#x2F;&#x2F;latex.codecogs.com&#x2F;gif.latex?%5Carg%5Cmax_%7Bc_j%7D%5Csum_%7Bx_i%5Cin&amp;N_k(x)%7D%7BI(y_i=c_j)%7D,%5Cquad&amp;i=1,2,%5Cdots,N;%5Cquad&amp;j=1,2,%5Cdots,K">
+<meta property="og:updated_time" content="2020-01-12T09:01:24.727Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;latex.codecogs.com&#x2F;gif.latex?T=%5Cleft%7B%5Cleft(x_1,y_1%5Cright),%5Cdots,%5Cleft(x_N,y_N%5Cright)%5Cright%7D,%5Cquad&amp;x_i%5Cin&amp;X,%5Cquad&amp;y_i%5Cin&amp;Y=%5Cleft%7Bc_1,%5Cdots,c_K%5Cright%7D">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/01/12/Machine Learning Notes (1): K-NN Algorithm and implementation/"/>
+
+
+
+
+
+  <title>Machine Learning Notes (1): K-NN Algorithm and implementation | Jason's Home</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Jason's Home</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">A RecSys Engineerer, a young man love literature and arts who wanna live with his own heart</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/12/Machine%20Learning%20Notes%20(1):%20K-NN%20Algorithm%20and%20implementation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jason Yi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jason's Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Machine Learning Notes (1): K-NN Algorithm and implementation</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-01-12T17:01:24+08:00">
+                2020-01-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p><em>k</em>-NN (<em>k</em>-nearest neighbour) is a classification and regression model. The goal of <em>k</em>-NN is to find <em>k</em> nearest neighbours of an instance and label them a given class. The input is feature vector and output is its class. <strong>Majority voting</strong> is used to predict a new instance’s class. <em>k</em>-NN is a supervised machine learning algorithm so that it needs labeled dataset.</p>
+<p>Three basic components of <em>k</em>-NN is:</p>
+<ol>
+<li>The <em>k</em> value;</li>
+<li>Distance measure;</li>
+<li>The rule of classification;</li>
+</ol>
+<p>Most people can figure out that we can implement <em>k</em>-NN by linear search for the main job in training phase is to find all nearest neighbour. Unfortunately, it’s unacceptable for large dataset because of high complexity both in time and space. A more universal method is applying <strong><em>kd</em> tree</strong> which is a binary tree with special form. Therefore, <em>k</em>-NN is an effective classification and regression model.  </p>
+<h1 id="Main-Contents"><a href="#Main-Contents" class="headerlink" title="Main Contents"></a>Main Contents</h1><ol>
+<li>Majority vote;</li>
+<li>Distance function;</li>
+<li><em>kd</em> Tree;</li>
+<li>C++ implementation step by step;</li>
+</ol>
+<a id="more"></a>
+
+<h1 id="The-mathematical-details"><a href="#The-mathematical-details" class="headerlink" title="The mathematical details"></a>The mathematical details</h1><h2 id="Majority-vote"><a href="#Majority-vote" class="headerlink" title="Majority vote"></a>Majority vote</h2><p>Majority vote is simple: we classify a dataset in a label is mostly frequent.</p>
+<p>We note that:</p>
+<p><img src="http://latex.codecogs.com/gif.latex?T=%5Cleft%7B%5Cleft(x_1,y_1%5Cright),%5Cdots,%5Cleft(x_N,y_N%5Cright)%5Cright%7D,%5Cquad&x_i%5Cin&X,%5Cquad&y_i%5Cin&Y=%5Cleft%7Bc_1,%5Cdots,c_K%5Cright%7D" alt=""></p>
+<p><em>X</em> is the set of instance’s feature vectors and <em>Y</em> is the set of label correspond to instances;</p>
+<p><img src="http://latex.codecogs.com/gif.latex?N_k%5Cleft(x%5Cright)" alt=""></p>
+<p>is the set of <em>k</em> nearest neighbors of instance <em>x</em>;</p>
+<p>The object function is to optimize: </p>
+<p><img src="http://latex.codecogs.com/gif.latex?%5Carg%5Cmax_%7Bc_j%7D%5Csum_%7Bx_i%5Cin&N_k(x)%7D%7BI(y_i=c_j)%7D,%5Cquad&i=1,2,%5Cdots,N;%5Cquad&j=1,2,%5Cdots,K" alt=""></p>
+<p>such that <em>I</em>(<em>x=y</em>) is called <strong>index function</strong> equals 1 if <em>x=y</em> is true else 0;</p>
+<p>So we can get the cost function for majority vote:</p>
+<p><img src="http://latex.codecogs.com/gif.latex?1-1/k%5Csum_%7Bx_i%5Cin&N_k(x)%7D%7BI(y_i=c_j)%7D" alt=""></p>
+<h2 id="Distance-function"><a href="#Distance-function" class="headerlink" title="Distance function"></a>Distance function</h2><p>In math, distance function is important because it’s one of the basic elements to picture a normed vector space; In machine learning algorithm, it’s used to compute the <em>similarity</em> between two feature vectors; By the way, there’re many other methods except distance like cosine or Pearson correlation coefficient;</p>
+<p>Let me introduce a commonly-used distance Lp distance:</p>
+<p><img src="http://latex.codecogs.com/gif.latex?L_p%5Cleft(x_i,x_j%5Cright)=%5Cleft(%5Csum_%7Bm=1%7D%5E%7Bn%7D%5Cleft%7Cx_%7Bi%7D%5E%7Bm%7D-x_%7Bj%7D%5E%7Bm%7D%5Cright%7C%5Cright)%5E%7B1/p%7D,%5Cquad&x_i,x_j%5Cin&%5CRe%5En" alt=""></p>
+<p>Several special condition when <em>p</em>=2 called <em>Euclidean distance</em>, <em>p</em>=1 called <em>Manhattan distance</em>, and <em>p</em>=<strong>inf</strong> is as follows:</p>
+<p><img src="http://latex.codecogs.com/gif.latex?L_%7B%5Cinfty%7D%5Cleft(x_i,x_j%5Cright)=%5Cmax_%7Bm%7D%5Cleft%7Cx_%7Bi%7D%5E%7Bm%7D-x_%7Bj%7D%5E%7Bm%7D%5Cright%7C,%5Cquad&x_i,x_j%5Cin&%5CRe%5En" alt=""></p>
+<h2 id="k-NN"><a href="#k-NN" class="headerlink" title="k-NN"></a><em>k</em>-NN</h2><h3 id="Mathematical-Details"><a href="#Mathematical-Details" class="headerlink" title="Mathematical Details"></a>Mathematical Details</h3><p>If we have a training dataset:</p>
+<p><img src="http://latex.codecogs.com/gif.latex?T=%5Cleft%7B%5Cleft(x_1,y_1%5Cright),%5Cdots,%5Cleft(x_N,y_N%5Cright)%5Cright%7D,%5Cquad&x_i%5Cin&X,%5Cquad&y_i%5Cin&Y=%5Cleft%7Bc_1,%5Cdots,c_K%5Cright%7D" alt=""></p>
+<p>distance measure has been given, we note that the set of <em>k</em> nearest neighbors of <em>x</em> is:</p>
+<p><img src="http://latex.codecogs.com/gif.latex?N_k%5Cleft(x%5Cright)" alt=""></p>
+<p>So we can predict <em>x</em>‘s class <em>y</em> by majority voting:</p>
+<p><img src="http://latex.codecogs.com/gif.latex?%5Carg%5Cmax_%7Bc_j%7D%5Csum_%7Bx_i%5Cin&N_k(x)%7D%7BI(y_i=c_j)%7D,%5Cquad&i=1,2,%5Cdots,N;%5Cquad&j=1,2,%5Cdots,K" alt=""></p>
+<h3 id="kd-Tree"><a href="#kd-Tree" class="headerlink" title="kd Tree"></a><em>kd</em> Tree</h3><p>kd Tree is a binary tree-like data structure which is a partition of <em>k</em>-dim space. Most developers are familiar with how to constructing a binary tree so I no longer describe it. Constructing a <em>kd</em> tree is similar to constructing a binary tree except that <em>kd</em> tree’s child nodes is generated by split points based on coordinates. For example, for each node in <em>n</em> depth, we can choose <em>l</em>th coordination as the   </p>
+<p>So split strategy is central to  </p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/01/05/Machine%20Learning%20Notes%20(2):%20PCA%20and%20SVD/" rel="next" title="Machine Learning Notes (2): PCA and SVD">
+                <i class="fa fa-chevron-left"></i> Machine Learning Notes (2): PCA and SVD
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/01/21/Machine%20Learning%20Notes%20(3):%20Logistic%20Regression/" rel="prev" title="Machine Learning Notes (3): Logistic Regression">
+                Machine Learning Notes (3): Logistic Regression <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Jason Yi</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Main-Contents"><span class="nav-number">2.</span> <span class="nav-text">Main Contents</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#The-mathematical-details"><span class="nav-number">3.</span> <span class="nav-text">The mathematical details</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Majority-vote"><span class="nav-number">3.1.</span> <span class="nav-text">Majority vote</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Distance-function"><span class="nav-number">3.2.</span> <span class="nav-text">Distance function</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#k-NN"><span class="nav-number">3.3.</span> <span class="nav-text">k-NN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mathematical-Details"><span class="nav-number">3.3.1.</span> <span class="nav-text">Mathematical Details</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#kd-Tree"><span class="nav-number">3.3.2.</span> <span class="nav-text">kd Tree</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jason Yi</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

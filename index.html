@@ -229,6 +229,537 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/17/Learning%20Algorithm(1):%20QuickSort/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jason Yi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jason's Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/03/17/Learning%20Algorithm(1):%20QuickSort/" itemprop="url">Learning Algorithm(1): QuickSort</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-17T17:55:25+08:00">
+                2020-03-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>Quick Sort is a classical <em>divide-and-conquer algorithm</em>. The basic idea is: in each phase, we choose one from an array and divide this array into two subarray. All elements in first one are smaller than this number and the other’s are all bigger than this number then do the same for both parts again. Finally, we merge all and get a sorted array. Quick sort’s average time-complexity is <em>O</em>(<em>n</em>log<em>n</em>) and space complexity is only <em>O</em>(1). Although its worst-case is up to <em>O</em>(<em>n^2</em>), it’s often the best practical choice for its remarkable average efficiency. </p>
+<h1 id="Core-Concepts"><a href="#Core-Concepts" class="headerlink" title="Core Concepts"></a>Core Concepts</h1><ol>
+<li>Quick Sort Algorithm Description;</li>
+<li>Complexity Analysis</li>
+</ol>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/03/17/Learning%20Algorithm(1):%20QuickSort/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/07/Operating%20System%20Notes%20(2):%20Processor%20Architecture%20and%20Machine%20Level%20Representation%20of%20Program/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jason Yi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jason's Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/03/07/Operating%20System%20Notes%20(2):%20Processor%20Architecture%20and%20Machine%20Level%20Representation%20of%20Program/" itemprop="url">Operating System Notes (2): Processor Architecture and Machine Level Representation of Program</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-07T12:40:54+08:00">
+                2020-03-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>We all know that computers execute <em>machine code</em> which is a sequence of bytes encoding the low-level operations that manipulate data, manage memory, read and write data on storage device and communicate over networks. Machine-level code, also called <em>assembly code</em>, is generated by compiler depend on different operating system. But as <em>abstraction</em> is an important notation in Computer Science, many high-level programming languages enable developers to neglect the assembly code layer for distinct standards in different platforms to improve developing efficiency and put more emphasis on practical tech schema.</p>
+<p>However, in some specific conditions like compiler optimization should take assembly layer into consideration because more effective organization of assembly code will achieve better performance which will influence the higher level architecture a lot. Plus, in <em>reverse engineering</em> decompile from machine code need to understand assembly code. </p>
+<p>So what consists of assembly code? Since assembly code is a kind of programming language, employing different forms of abstraction and hiding details of implementation thorough the use of simpler, abstract model is two important properties for assembly code. The basic component of assembly code is instruction, instruction defines operation and processor state so that assembly code is equivalent to the composition of <em>instruction set architecture</em> which defines the <em>processor state</em>, <em>the format of instructions</em> and <em>their effect on processor state</em>. </p>
+<p>A program can be viewed as a sequence of instruction and processor executes them one by one. But programs executed concurrently is one of the most critical characteristics in modern operating system. Multi-core architecture can ensure that in the same time there are several processors are running simultaneously. But for one core, how to improve the performance of concurrency? In most modern CPU architecture, sequential pipeline becomes a necessary component. The basic idea of pipeline is that instruction sequence execution can be split into several stages and processor can simultaneously execute different stages for different program to increase <em>throughout</em> of the system, that is, the number of *”customer”* served per unit time. </p>
+<p>Generally, processing instruction involves a number of operations. We can organize them in a particular sequence of stages. Although instructions differ greatly in their actions, they are all executed in a uniform sequence. Let’s see the processing stages briefly: </p>
+<p><strong>Fetch</strong> -&gt; <strong>Decode</strong> -&gt; <strong>Execute</strong> -&gt; <strong>Memory</strong> -&gt;<strong>Write Back</strong> -&gt; <strong>PC update</strong></p>
+<p>In general, <strong>Compiler</strong> -&gt; <strong>Linker</strong> -&gt; <strong>Instruction Set Architecture</strong> -&gt; <strong>Assembly code</strong> -&gt; <strong>Sequential stages</strong> -&gt; <strong>Pipeline</strong> is the progress of source code executed in operating system. Compile is not our main point and linking will be introduced in another note. </p>
+<p>In this note, we will introduce these concepts: </p>
+<ol>
+<li>IA32 Instruction Set Architecture (ISA);</li>
+<li>Y86 Processor: Sequential and Pipeline implementation on the foundation of IA32; </li>
+</ol>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/03/07/Operating%20System%20Notes%20(2):%20Processor%20Architecture%20and%20Machine%20Level%20Representation%20of%20Program/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/21/Machine%20Learning%20Notes%20(3):%20Logistic%20Regression/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jason Yi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jason's Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/01/21/Machine%20Learning%20Notes%20(3):%20Logistic%20Regression/" itemprop="url">Machine Learning Notes (3): Logistic Regression</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-01-21T23:41:36+08:00">
+                2020-01-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>Logistic Regression (LR) is a classical model for classification and regression which is widely used in Compute Vision, NLP and Recommending System. Its simple, effective and adaptive to both linear and nonlinear conditions. It is a <em>logarithmic linear model</em> as well as <em>Maximum Entropy</em> Model (MEM). MEM is a rule for statistic learning and generalized from Logistic Regression. </p>
+<p>In this article, I will introduce LR first, then generalize it to MEM. At last, I will introduce how to train LR and MEM by <em>IIS</em> and <em>Quasi-Newton Method</em>.</p>
+<p>In recent years, gradient decent and another optimizer like Adam becomes the main choices for training a ML and DL model. So I will also introduce Gradient Decent briefly but more details will be noted in another article.    </p>
+<h1 id="Core-Concepts"><a href="#Core-Concepts" class="headerlink" title="Core Concepts"></a>Core Concepts</h1><ol>
+<li>Logistic Regression and Maximum Entropy;</li>
+<li>IIS and Quasi-Newton Method;</li>
+<li>Gradient Decent;</li>
+</ol>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/01/21/Machine%20Learning%20Notes%20(3):%20Logistic%20Regression/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/12/Machine%20Learning%20Notes%20(1):%20K-NN%20Algorithm%20and%20implementation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jason Yi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jason's Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/01/12/Machine%20Learning%20Notes%20(1):%20K-NN%20Algorithm%20and%20implementation/" itemprop="url">Machine Learning Notes (1): K-NN Algorithm and implementation</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-01-12T17:01:24+08:00">
+                2020-01-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p><em>k</em>-NN (<em>k</em>-nearest neighbour) is a classification and regression model. The goal of <em>k</em>-NN is to find <em>k</em> nearest neighbours of an instance and label them a given class. The input is feature vector and output is its class. <strong>Majority voting</strong> is used to predict a new instance’s class. <em>k</em>-NN is a supervised machine learning algorithm so that it needs labeled dataset.</p>
+<p>Three basic components of <em>k</em>-NN is:</p>
+<ol>
+<li>The <em>k</em> value;</li>
+<li>Distance measure;</li>
+<li>The rule of classification;</li>
+</ol>
+<p>Most people can figure out that we can implement <em>k</em>-NN by linear search for the main job in training phase is to find all nearest neighbour. Unfortunately, it’s unacceptable for large dataset because of high complexity both in time and space. A more universal method is applying <strong><em>kd</em> tree</strong> which is a binary tree with special form. Therefore, <em>k</em>-NN is an effective classification and regression model.  </p>
+<h1 id="Main-Contents"><a href="#Main-Contents" class="headerlink" title="Main Contents"></a>Main Contents</h1><ol>
+<li>Majority vote;</li>
+<li>Distance function;</li>
+<li><em>kd</em> Tree;</li>
+<li>C++ implementation step by step;</li>
+</ol>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/01/12/Machine%20Learning%20Notes%20(1):%20K-NN%20Algorithm%20and%20implementation/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/05/Machine%20Learning%20Notes%20(2):%20PCA%20and%20SVD/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -486,125 +1017,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/02/Machine%20Learning%20Notes%20(1):%20K-NN%20Algorithm%20and%20implementation/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jason Yi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jason's Home">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/01/02/Machine%20Learning%20Notes%20(1):%20K-NN%20Algorithm%20and%20implementation/" itemprop="url">Machine Learning Notes (1): K-NN Algorithm and implementation</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-01-02T00:13:50+08:00">
-                2020-01-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/02/Learning%20DataStructure%20(1):%20Hash%20Table/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -767,7 +1179,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
